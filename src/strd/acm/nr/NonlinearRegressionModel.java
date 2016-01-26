@@ -20,29 +20,37 @@ import org.apache.commons.math3.util.FastMath;
  */
 public abstract class NonlinearRegressionModel {
 
+    protected double[] fittedValues;
+    protected double[][] jacobian;
     private final LeastSquaresBuilder leastSquaresBuilder;
     private LeastSquaresOptimizer leastSquaresOptimizer;
     private LeastSquaresProblem leastSquaresProblem;
     protected int maximumEvaluations;
     protected int maximumIterations;
+    protected int numberOfParameters;
     private Optimizer optimizer;
     private Optimum optimum;
     protected double[] parameterValues;
     protected double[][] predictorVariables;
     protected double[] responseVariable;
+    protected int sampleSize;
     protected double tolerance;
 
     public NonlinearRegressionModel() {
+        fittedValues = null;
+        jacobian = null;
         leastSquaresBuilder = new LeastSquaresBuilder();
         leastSquaresOptimizer = new LevenbergMarquardtOptimizer();
         leastSquaresProblem = null;
         maximumEvaluations = 5000;
         maximumIterations = 5000;
+        numberOfParameters = 0;
         optimizer = Optimizer.LevenbergMarquardt;
         optimum = null;
         parameterValues = null;
         predictorVariables = null;
         responseVariable = null;
+        sampleSize = 0;
         tolerance = 1e-15;
     }
 
@@ -69,6 +77,9 @@ public abstract class NonlinearRegressionModel {
 
     public void setResponseVariable(double[] responseVariable) {
         this.responseVariable = responseVariable;
+        sampleSize = responseVariable.length;
+        fittedValues = new double[sampleSize];
+        jacobian = new double[sampleSize][numberOfParameters];
     }
 
     public void setTolerance(double tolerance) {
