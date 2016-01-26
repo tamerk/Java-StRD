@@ -48,7 +48,7 @@ public class Main {
     public static void main(String[] args) {
         String[] columnNames = new String[]{"Dataset", "GN1", "GN2", "LM1", "LM2"};
         Object[] row;
-        Object[][] data = new Object[1][5];
+        Object[][] data = new Object[2][5];
 
         NonlinearRegressionDataset dataset;
         NonlinearRegressionModel model;
@@ -59,7 +59,16 @@ public class Main {
         test(model, dataset, listRows);
         row = new Object[5];
         row = listRows.toArray(row);
+        listRows.clear();
         data[0] = row;
+
+        dataset = new Chwirut2Dataset();
+        model = new Chwirut2Model();
+        test(model, dataset, listRows);
+        row = new Object[5];
+        row = listRows.toArray(row);
+        listRows.clear();
+        data[1] = row;
 
         TextTable textTable = new TextTable(columnNames, data);
         textTable.printTable();

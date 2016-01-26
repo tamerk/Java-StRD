@@ -9,7 +9,13 @@ This project aims to check the accuracy of Java numerical libraries against the 
 ### Nonlinear Regression ###
 
 <pre>
-| Dataset| GN1     | GN2     | LM1     | LM2     |
-|================================================|
-| Misra1a|    11.13|    11.13|     9.78|    10.13|
+__________________________________________________
+| Dataset | GN1     | GN2     | LM1     | LM2     |
+|=================================================|
+| Misra1a |    11.13|    11.13|     9.78|    10.13|
+| Chwirut2|     9.36|     8.58|     6.18|     7.24|
 </pre>
+
+
+
+
